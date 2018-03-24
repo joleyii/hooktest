@@ -15,23 +15,21 @@ public class Module implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam loadPackageParam) {
-        if (loadPackageParam.packageName.equals("com.xinmei.swig")) {
-            XposedBridge.log("ccccccx}##");
-            XposedHelpers.findAndHookMethod("com.comet.keyboard.dictionary.RnnModuleJNI",
+        if (loadPackageParam.packageName.equals("target_packagename")) {
+            XposedHelpers.findAndHookMethod("target_classname",
                     loadPackageParam.classLoader,
-                    "a",
+                    "taget_mathedname",
                     char[].class,
                     int.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            XposedBridge.log("ccccccx}+++" + new String((char[]) param.args[0]) +
+                            XposedBridge.log("beforeHookedMethod" + new String((char[]) param.args[0]) +
                                     "|||" + param.args[1]);
                         }
 
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                            XposedBridge.log("ccccccx}+++" + param.args[0] + param.args[1]);
                         }
                     });
         }
